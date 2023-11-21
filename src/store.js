@@ -41,10 +41,10 @@ class Store {
   /**
    * Добавление новой записи
    */
-  addItem() {
+  addItem(id) {
     this.setState({
       ...this.state,
-      list: [...this.state.list, { code: this.state.list.length + 1, title: 'Новая запись' }]
+      list: [...this.state.list, { code: id, title: 'Новая запись' }]
     })
   };
 

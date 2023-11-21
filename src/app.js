@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createElement } from './utils.js';
 import './styles.css';
 
@@ -8,8 +8,14 @@ import './styles.css';
  * @returns {React.ReactElement}
  */
 function App({ store }) {
+  const [id, setID] = useState(store.getState().list.length + 1);
 
   const list = store.getState().list;
+
+  const handleAddItem = () => {
+    setID(prev => prev + 1);
+    store.addItem(id);
+  }
 
   return (
     <div className='App'>
@@ -17,7 +23,7 @@ function App({ store }) {
         <h1>Приложение на чистом JS</h1>
       </div>
       <div className='App-controls'>
-        <button onClick={() => store.addItem()}>Добавить</button>
+        <button onClick={handleAddItem}>Добавить</button>
       </div>
       <div className='App-center'>
         <div className='List'>{
