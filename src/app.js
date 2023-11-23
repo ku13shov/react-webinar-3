@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { createElement } from './utils.js';
 import './styles.css';
 
@@ -8,13 +8,10 @@ import './styles.css';
  * @returns {React.ReactElement}
  */
 function App({ store }) {
-  const [id, setID] = useState(store.getState().list.length + 1);
-
   const list = store.getState().list;
 
   const handleAddItem = () => {
-    setID(prev => prev + 1);
-    store.addItem(id);
+    store.addItem();
   }
 
   const showSelectedMessage = (item) => {
