@@ -17,6 +17,22 @@ function App({ store }) {
     store.addItem(id);
   }
 
+  const showSelectedMessage = (item) => {
+    if (item.selectedCount) {
+      if (item.selectedCount % 10 === 1 && item.selectedCount % 100 !== 11) {
+        return ` | Выделяли ${item.selectedCount} раз`;
+      } else if (
+        item.selectedCount % 10 >= 2 &&
+        item.selectedCount % 10 <= 4 &&
+        (item.selectedCount % 100 < 10 || item.selectedCount % 100 >= 20)
+      ) {
+        return ` | Выделяли ${item.selectedCount} раза`;
+      } else {
+        return ` | Выделяли ${item.selectedCount} раз`;
+      }
+    }
+  }
+
   return (
     <div className='App'>
       <div className='App-head'>
@@ -32,7 +48,7 @@ function App({ store }) {
               <div className={'Item' + (item.selected ? ' Item_selected' : '')}
                 onClick={() => store.selectItem(item.code)}>
                 <div className='Item-code'>{item.code}</div>
-                <div className='Item-title'>{item.title} {item.selectedCount ? ` | Выделяли ${item.selectedCount} раз` : ''}</div>
+                <div className='Item-title'>{item.title} {showSelectedMessage(item)}</div>
                 <div className='Item-actions'>
                   <button onClick={() => store.deleteItem(item.code)}>
                     Удалить
